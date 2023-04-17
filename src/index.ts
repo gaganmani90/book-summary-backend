@@ -1,7 +1,8 @@
 import express, {Express, Request, Response} from 'express';
 
 import dotenv from 'dotenv';
-import {ChatGPTClient} from "./openai/open-ai-client";
+import {ChatGPTClient} from "./clients/open-ai-client";
+import {MongoDbClient} from "./clients/mongo-db-client";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const port = process.env.PORT;
 
 app.post('/ask', async (req: Request, res: Response) => {
     const prompt = req.body.prompt;
+    MongoDbClient.Instance.bookSummaryCollection() //TODO: this is just for testing the db connection
     try {
         if(prompt == null) {
             res.status(400).json({
