@@ -3,7 +3,7 @@ import express, {Express, Request, Response} from 'express';
 import dotenv from 'dotenv';
 import {ChatGPTClient} from "./clients/open-ai-client";
 import { connectToDatabase } from "./services/database.service"
-import { gamesRouter } from "./routes/games.router";
+import {bookRouter} from "./routes/book.router";
 
 dotenv.config();
 
@@ -35,7 +35,7 @@ app.post('/ask', async (req: Request, res: Response) => {
 
 connectToDatabase()
     .then(() => {
-        app.use("/games", gamesRouter);
+        app.use("/books", bookRouter);
 
         app.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);

@@ -3,24 +3,14 @@ import * as mongoDB from "mongodb";
 import * as dotenv from "dotenv";
 
 // Global Variables
-export const collections: { games?: mongoDB.Collection } = {}
+export const collections: {
+    games?: mongoDB.Collection,
+    bookSummary?: mongoDB.Collection
+} = {}
 
-// Initialize Connection
-export async function connectToDatabase () {
-    const BOOK_SUMMARY_COLLECTION = process.env.BOOK_SUMMARY_COLLECTION_NAME
-    console.log("connecting to db...")
-    dotenv.config();
-
-    const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING!!);
-    console.log(`successfully got the client ${client}`)
-
-    await client.connect();
-    console.log(`connected`)
-
-    const db: mongoDB.Db = client.db(process.env.DB_NAME);
-
+async function validate(db: mongoDB.Db) {
     await db.command({
-        "collMod": BOOK_SUMMARY_COLLECTION,
+        "collMod": process.env.BOOK_SUMMARY_COLLECTION_NAME!!,
         "validator": {
             $jsonSchema: {
                 bsonType: "object",
@@ -45,10 +35,29 @@ export async function connectToDatabase () {
         }
     });
 
+}
+// Initialize Connection
+export async function connectToDatabase() {
+    const BOOK_SUMMARY_COLLECTION = process.env.BOOK_SUMMARY_COLLECTION_NAME!!
+    console.log("connecting to db...")
+    dotenv.config();
+
+    const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING!!);
+    console.log(`successfully got the client ${client}`)
+
+    await client.connect();
+    console.log(`connected`)
+
+    const db: mongoDB.Db = client.db(process.env.DB_NAME);
+
+    // await validate(db)
+
     // @ts-ignore
     const gamesCollection: mongoDB.Collection = db.collection(BOOK_SUMMARY_COLLECTION);
+    const bookSummaryCollection: mongoDB.Collection = db.collection(BOOK_SUMMARY_COLLECTION);
 
     collections.games = gamesCollection;
+    collections.bookSummary = bookSummaryCollection;
 
     console.log(`Successfully connected to database: ${db.databaseName} and collection: ${gamesCollection.collectionName}`);
 }

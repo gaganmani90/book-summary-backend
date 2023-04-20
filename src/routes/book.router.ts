@@ -2,25 +2,25 @@
 import express, { Request, Response } from "express";
 import { ObjectId } from "mongodb";
 import { collections } from "../services/database.service";
-import Game from "../models/game";
+import Book from "../models/book";
 
 // Global Config
-export const gamesRouter = express.Router();
+export const bookRouter = express.Router();
 
-gamesRouter.use(express.json());
+bookRouter.use(express.json());
 
 // GET
-gamesRouter.get("/:id", async (req: Request, res: Response) => {
+bookRouter.get("/:id", async (req: Request, res: Response) => {
     const id = req?.params?.id;
 
     try {
 
         const query = { _id: new ObjectId(id) };
         // @ts-ignore
-        const game = (await collections.games.findOne(query)) as Game;
+        const book: Book = (await collections.games.findOne(query)) as Book;
 
-        if (game) {
-            res.status(200).send(game);
+        if (book) {
+            res.status(200).send(book);
         }
     } catch (error) {
         res.status(404).send(`Unable to find matching document with id: ${req.params.id}`);
@@ -29,11 +29,11 @@ gamesRouter.get("/:id", async (req: Request, res: Response) => {
 
 // POST
 
-gamesRouter.post("/", async (req: Request, res: Response) => {
+bookRouter.post("/", async (req: Request, res: Response) => {
     try {
-        const newGame = req.body as Game;
+        const newBook: Book = req.body as Book;
         // @ts-ignore
-        const result = await collections.games.insertOne(newGame);
+        const result = await collections.games.insertOne(newBook);
 
         result
             ? res.status(201).send(`Successfully created a new game with id ${result.insertedId}`)
@@ -46,19 +46,19 @@ gamesRouter.post("/", async (req: Request, res: Response) => {
 });
 
 // PUT
-gamesRouter.put("/:id", async (req: Request, res: Response) => {
+bookRouter.put("/:id", async (req: Request, res: Response) => {
     const id = req?.params?.id;
 
     try {
-        const updatedGame: Game = req.body as Game;
+        const updatedBook: Book = req.body as Book;
         const query = { _id: new ObjectId(id) };
 
         // @ts-ignore
-        const result = await collections.games.updateOne(query, { $set: updatedGame });
+        const result = await collections.games.updateOne(query, { $set: updatedBook });
 
         result
-            ? res.status(200).send(`Successfully updated game with id ${id}`)
-            : res.status(304).send(`Game with id: ${id} not updated`);
+            ? res.status(200).send(`Successfully updated book summary with id ${id}`)
+            : res.status(304).send(`Book summary with id: ${id} not updated`);
     } catch (error) {
         // @ts-ignore
         console.error(error.message);
@@ -68,7 +68,7 @@ gamesRouter.put("/:id", async (req: Request, res: Response) => {
 });
 
 // DELETE
-gamesRouter.delete("/:id", async (req: Request, res: Response) => {
+bookRouter.delete("/:id", async (req: Request, res: Response) => {
     const id = req?.params?.id;
 
     try {
@@ -91,12 +91,12 @@ gamesRouter.delete("/:id", async (req: Request, res: Response) => {
     }
 });
 
-gamesRouter.get("/", async (_req: Request, res: Response) => {
+bookRouter.get("/", async (_req: Request, res: Response) => {
     try {
         // @ts-ignore
-        const games = (await collections.games.find({}).toArray()) as Game[];
+        const books = (await collections.games.find({}).toArray()) as Book[];
 
-        res.status(200).send(games);
+        res.status(200).send(books);
     } catch (error) {
         // @ts-ignore
         res.status(500).send(error.message);
