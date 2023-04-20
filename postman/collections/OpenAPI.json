@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "75bc202a-675b-4c26-83c5-eadf944ed742",
+		"name": "OpenAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "6834843-75bc202a-675b-4c26-83c5-eadf944ed742"
+	},
+	"item": [
+		{
+			"name": "POST Prompt",
+			"id": "89fca2af-363f-4905-a0db-69f2a2e4e546",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"prompt\": \"give me summary of book The Monk Who Sold His Ferrari\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ask",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a book",
+			"id": "d4792f85-06f9-47d8-a1ae-ac265067811c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"summary\": \"book summary\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "e91e6318-d1de-4dcd-a155-bc718a8c422a",
+					"name": "create a book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"summary\": \"book summary\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update book",
+			"id": "6c79eb3c-25c3-46e0-9d32-1719be5a462c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari - updated\",\n    \"summary\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/64408b8b44b8fba579f4b8ae",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"64408b8b44b8fba579f4b8ae"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": null,
+							"type": "text",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET A Book",
+			"id": "520ae327-a93e-48e2-b2e1-112b2d484c6c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"price\": 10,\n    \"category\": \"book\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/64408b8b44b8fba579f4b8ae",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"64408b8b44b8fba579f4b8ae"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete book",
+			"id": "7f635d05-d8b5-4de2-a683-ef37a30a62f3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"price\": 10,\n    \"category\": \"book\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/64408b3544b8fba579f4b8ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"64408b3544b8fba579f4b8ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Books",
+			"id": "e9a32b56-8694-4f9d-ba0a-4112a99a608e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
