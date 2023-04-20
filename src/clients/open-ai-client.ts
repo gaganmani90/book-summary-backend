@@ -20,7 +20,7 @@ export class ChatGPTClient {
 
     public async openAiResponse(prompt: string,
                                 model = "text-davinci-003",
-                                maxToken = 10): Promise<string> {
+                                maxToken = 1024): Promise<string> {
         let cache = LocalCache.Instance
         if (cache.get(prompt)) {
             return cache.get(prompt)
