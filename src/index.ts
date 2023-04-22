@@ -9,7 +9,7 @@ import {opanAiQueryRouter} from "./routes/openai.query.router";
 
 dotenv.config();
 
-const app: Express = express();
+export const app: Express = express();
 app.use(express.json());
 const port = process.env.PORT;
 
