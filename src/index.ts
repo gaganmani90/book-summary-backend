@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import {ChatGPTClient} from "./clients/open-ai-client";
 import { connectToDatabase } from "./services/database.service"
 import {bookRouter} from "./routes/book.router";
+import {profileRouter} from "./routes/profile.router";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.post('/ask', async (req: Request, res: Response) => {
 connectToDatabase()
     .then(() => {
         app.use("/books", bookRouter);
+        app.use("/profile", profileRouter);
 
         app.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);
