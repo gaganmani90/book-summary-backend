@@ -2,13 +2,13 @@
 import * as mongoDB from "mongodb";
 import * as dotenv from "dotenv";
 import {validateBookSchema} from "../models/book";
-import {validateProfileSchema} from "../models/profile";
+import {createProfileUniqueIndex, validateProfileSchema} from "../models/profile";
+import {createUniqueIndex} from "../models/openai.query";
 
 export const BOOK_DB_NAME = process.env.DB_NAME!!
 export const DB_CONNECTION_STRING = process.env.DB_CONN_STRING!!
 // Global Variables
 export const collections: {
-    games?: mongoDB.Collection,
     bookSummary?: mongoDB.Collection,
     profile?: mongoDB.Collection,
     openAiQuery?: mongoDB.Collection
@@ -36,10 +36,13 @@ export async function connectToDatabase() {
     await validateBookSchema(db)
     await validateProfileSchema(db)
 
-    collections.games = db.collection(BOOK_SUMMARY_COLLECTION);
     collections.bookSummary = db.collection(BOOK_SUMMARY_COLLECTION);
     collections.profile = db.collection(PROFILE_COLLECTION_NAME);
     collections.openAiQuery = db.collection(OPENAI_QUERY__COLLECTION_NAME)
+
+    //create unique index
+    await createUniqueIndex(collections.openAiQuery)
+    await createProfileUniqueIndex(collections.profile)
 
     console.log(`Successfully connected to database: ${db.databaseName}; connection: ${DB_CONNECTION_STRING}`);
 }

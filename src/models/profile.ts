@@ -9,6 +9,10 @@ export default class Profile {
                 public id?: ObjectId) {}
 }
 
+export const createProfileUniqueIndex = async (collection: mongoDB.Collection) => {
+    await collection.createIndex({email: 1}, {unique: true, sparse: true});
+}
+
 export const validateProfileSchema = async (db: mongoDB.Db) => {
     const PROFILE_COLLECTION_NAME = process.env.PROFILE_COLLECTION_NAME!!
     await db.command({

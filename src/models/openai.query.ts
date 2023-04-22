@@ -2,6 +2,7 @@
 import { ObjectId } from "mongodb";
 import * as mongoDB from "mongodb";
 import {profileRouter} from "../routes/profile.router";
+import {collections} from "../services/database.service";
 
 // Class Implementation
 export default class OpenAiQuery {
@@ -13,6 +14,10 @@ export default class OpenAiQuery {
         return `profileId: ${this.profileId}; query: ${this.query}; response: ${this.response}
         id: ${this.id}`
     }
+}
+
+export const createUniqueIndex = async (collection: mongoDB.Collection) => {
+    await collection.createIndex({profileId: 1, query: 1}, {unique: true});
 }
 
 export const validateOpenAiQuerySchema = async (db: mongoDB.Db) => {
