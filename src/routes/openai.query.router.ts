@@ -6,12 +6,13 @@ import Profile from "../models/profile";
 import {OpenAiQueryController} from "../open-ai-query-controller";
 import {ChatGPTClient} from "../clients/open-ai-client";
 import OpenAiQuery from "../models/openai.query";
+import {limiter} from "./profile.router";
 
 // Global Config
 export const opanAiQueryRouter = express.Router();
 
 opanAiQueryRouter.use(express.json());
-
+opanAiQueryRouter.use(limiter)
 
 opanAiQueryRouter.get("/", async (_req: Request, res: Response) => {
     try {

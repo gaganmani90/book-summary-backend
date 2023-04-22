@@ -6,11 +6,20 @@ import Profile from "../models/profile";
 import {OpenAiQueryController} from "../open-ai-query-controller";
 import {ChatGPTClient} from "../clients/open-ai-client";
 import OpenAiQuery, {fetchOpenAiQueryByProfileId} from "../models/openai.query";
+import rateLimit from 'express-rate-limit';
+
+export const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // limit each IP to 100 requests per windowMs
+});
+
 
 // Global Config
 export const profileRouter = express.Router();
 
 profileRouter.use(express.json());
+profileRouter.use(limiter)
+
 
 // GET
 profileRouter.get("/:id", async (req: Request, res: Response) => {
