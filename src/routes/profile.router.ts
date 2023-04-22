@@ -64,7 +64,7 @@ profileRouter.post("/", async (req: Request, res: Response) => {
         const result = await collections.profile.insertOne(newBook);
 
         result
-            ? res.status(201).send(`Successfully created a new profile with id ${result.insertedId}`)
+            ? res.status(201).json({id: result.insertedId})
             : res.status(500).send("Failed to create a new profile.");
     } catch (error) {
         console.error(error);
