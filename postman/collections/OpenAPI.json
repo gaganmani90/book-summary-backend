@@ -20,7 +20,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"age\": 32,\n    \"email\": null,\n    \"gender\": \"male\"\n  \n}",
+							"raw": "{\n    \"age\": 45,\n    \"email\": \"gagur7sds1@gmail.com\",\n    \"gender\": \"male\"\n  \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -60,7 +60,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/profile/64433add52dd1e634070fcd6",
+							"raw": "http://localhost:8080/profile/6443ea02710f2f17b1f311d8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -68,7 +68,7 @@
 							"port": "8080",
 							"path": [
 								"profile",
-								"64433add52dd1e634070fcd6"
+								"6443ea02710f2f17b1f311d8"
 							]
 						}
 					},
@@ -84,12 +84,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/profile",
+							"raw": "http://{{local-endpoint}}/profile",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{local-endpoint}}"
 							],
-							"port": "8080",
 							"path": [
 								"profile"
 							]
@@ -173,6 +172,128 @@
 				}
 			],
 			"id": "d1d2638b-7c5e-4b3e-8373-37d1ba82e4ec"
+		},
+		{
+			"name": "OpenAIQueries",
+			"item": [
+				{
+					"name": "get queries",
+					"id": "eba66a05-006b-4783-883a-f7d7b328a475",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{local-endpoint}}/queries",
+							"protocol": "http",
+							"host": [
+								"{{local-endpoint}}"
+							],
+							"path": [
+								"queries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get queries by profile id",
+					"id": "e82fc637-a5de-4cc6-8079-958d0be4393c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{local-endpoint}}/queries?profileId=6443ea02710f2f17b1f311d8",
+							"protocol": "http",
+							"host": [
+								"{{local-endpoint}}"
+							],
+							"path": [
+								"queries"
+							],
+							"query": [
+								{
+									"key": "profileId",
+									"value": "6443ea02710f2f17b1f311d8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get query",
+					"id": "8d698d63-527a-4e5a-b5d4-abc222b10fdb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"price\": 10,\n    \"category\": \"book\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/queries/6444124698eb4947455947c0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"queries",
+								"6444124698eb4947455947c0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete query",
+					"id": "ec5f6777-cb9e-4b29-88be-7b923e75d6c3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"price\": 10,\n    \"category\": \"book\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/queries/6444123198eb4947455947a9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"queries",
+								"6444123198eb4947455947a9"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "eaecf188-68a8-4ece-84c1-4d304a24b7db"
 		},
 		{
 			"name": "POST Prompt",
