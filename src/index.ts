@@ -5,6 +5,7 @@ import {ChatGPTClient} from "./clients/open-ai-client";
 import { connectToDatabase } from "./services/database.service"
 import {bookRouter} from "./routes/book.router";
 import {profileRouter} from "./routes/profile.router";
+import {opanAiQueryRouter} from "./routes/openai.query.router";
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ connectToDatabase()
         });
         app.use("/books", bookRouter);
         app.use("/profile", profileRouter);
+        app.use("/queries", opanAiQueryRouter);
 
         app.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);

@@ -5,7 +5,7 @@ import { collections } from "../services/database.service";
 import Profile from "../models/profile";
 import {OpenAiQueryController} from "../open-ai-query-controller";
 import {ChatGPTClient} from "../clients/open-ai-client";
-import OpenAiQuery from "../models/openai.query";
+import OpenAiQuery, {fetchOpenAiQueryByProfileId} from "../models/openai.query";
 
 // Global Config
 export const profileRouter = express.Router();
@@ -21,21 +21,39 @@ profileRouter.get("/:id", async (req: Request, res: Response) => {
         const query = { _id: new ObjectId(id) };
         // @ts-ignore
         const profile: Profile = (await collections.profile.findOne(query)) as Profile;
-        const openAiQuery = OpenAiQueryController.recommendTopBooks(profile)
-        var queryObject: OpenAiQueryController
-        const value = await ChatGPTClient.Instance.openAiResponse(openAiQuery)
-        queryObject = new OpenAiQuery(profile.id!!, openAiQuery, value)
+        console.log(`profile id is ${JSON.stringify(profile)}`)
+
+
+        const openAiQuery = OpenAiQueryController.recommendTopBooksQuery(profile)
+        var queryObject: OpenAiQuery
+        const queryResponse = await ChatGPTClient.Instance.openAiResponse(openAiQuery)
+        queryObject = new OpenAiQuery(profile._id!!, openAiQuery, queryResponse)
         console.log(`insert chatGPT response to DB with object ${queryObject.toString()}`)
+
+        /**
+         * Insert or replace query, profile id and response
+         */
+        //fetchOpenAiQueryByProfileId(collections.openAiQuery, queryObject)
+        const options = {
+            upsert: true, // create a new document if it doesn't exist
+            returnOriginal: true // return the updated document
+        };
         // @ts-ignore
-        const insertedObject = await collections.openAiQuery.insertOne(queryObject);
+        const insertedObject = await collections.openAiQuery?.findOneAndUpdate(
+            {profileId: new ObjectId(queryObject.profileId), query: queryObject.query},
+            { $set: {profileId: queryObject.profileId,
+                query: queryObject.query,
+                response: queryObject.response} },
+            options);
         if (profile) {
             res.status(200).send(queryObject);
         }
 
     } catch (error) {
-        res.status(404).send(`Unable to find matching document with id: ${req.params.id}`);
+        res.status(404).send(`Unable to find matching document with id: ${req.params.id}, err: ${error}`);
     }
 });
+
 
 // POST
 

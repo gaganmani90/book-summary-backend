@@ -6,7 +6,7 @@ import * as mongoDB from "mongodb";
 export default class Profile {
     constructor(public email: string, public age: number,
                 public gender: string,
-                public id?: ObjectId) {}
+                public _id?: ObjectId) {}
 }
 
 export const createProfileUniqueIndex = async (collection: mongoDB.Collection) => {

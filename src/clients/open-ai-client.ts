@@ -1,5 +1,5 @@
 import {OpenAIApi} from "openai";
-import {LocalCache} from "../cache/LocalCache";
+import RedisClient from "../cache/redis-client";
 
 export class ChatGPTClient {
     private openAi: OpenAIApi
@@ -21,19 +21,27 @@ export class ChatGPTClient {
     public async openAiResponse(prompt: string,
                                 model = "text-davinci-003",
                                 maxToken = 1024): Promise<string> {
-        let cache = LocalCache.Instance
-        if (cache.get(prompt)) {
-            return cache.get(prompt)
+        var value: string = ""
+        try {
+            const cacheResponse = await RedisClient.get(prompt)
+            if (cacheResponse) {
+                console.log("cache hit...")
+                return cacheResponse
+            }
+            console.log("chatGPT service call...")
+            const response = await this.openAi.createCompletion({
+                model: model,
+                prompt: prompt,
+                max_tokens: maxToken,
+                temperature: 0,
+            })
+            value = response.data.choices[0].text == undefined ? "" : response.data.choices[0].text
+            RedisClient.set(prompt, value)
+        } catch(err) {
+            console.error("error during chat GPT api call")
+            console.error(err)
         }
-        console.log("making service call...")
-        const response = await this.openAi.createCompletion({
-            model: model,
-            prompt: prompt,
-            max_tokens: maxToken,
-            temperature: 0,
-        })
-        const value: string | undefined = response.data.choices[0].text == undefined ? "" : response.data.choices[0].text
-        cache.set(prompt, value)
         return value;
     }
 }
+

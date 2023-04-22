@@ -29,7 +29,7 @@ export async function connectToDatabase() {
     console.log(`successfully got the client ${client}`)
 
     await client.connect();
-    console.log(`connected`)
+    console.log(`db connected`)
 
     const db: mongoDB.Db = client.db(BOOK_DB_NAME);
 

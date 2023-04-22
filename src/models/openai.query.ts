@@ -8,16 +8,20 @@ import {collections} from "../services/database.service";
 export default class OpenAiQuery {
     constructor(public profileId: ObjectId, public query: string,
                 public response: string,
-                public id?: ObjectId) {}
+                public _id?: ObjectId) {}
 
     toString(): string {
-        return `profileId: ${this.profileId}; query: ${this.query}; response: ${this.response}
-        id: ${this.id}`
+        return `profileId: ${this.profileId}; query: ${this.query};
+        id: ${this._id}`
     }
 }
 
 export const createUniqueIndex = async (collection: mongoDB.Collection) => {
     await collection.createIndex({profileId: 1, query: 1}, {unique: true});
+}
+
+export const fetchOpenAiQueryByProfileId = async (collection: mongoDB.Collection, queryObject: OpenAiQuery) => {
+    return await collection.findOne({profileId: new ObjectId(queryObject.profileId), query: queryObject.query}) as OpenAiQuery
 }
 
 export const validateOpenAiQuerySchema = async (db: mongoDB.Db) => {

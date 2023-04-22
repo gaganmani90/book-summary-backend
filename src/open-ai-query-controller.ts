@@ -1,7 +1,7 @@
 import Profile from "./models/profile";
 
 export class OpenAiQueryController {
-    public static recommendTopBooks(profile: Profile): string {
+    public static recommendTopBooksQuery(profile: Profile): string {
         var query = ""
         const prefix = `recommend top ${queryParams.bookCount} books for`
         return prefix + ` ${profile.age} , ${profile.gender} in ${queryParams.wordsLimit} words`
