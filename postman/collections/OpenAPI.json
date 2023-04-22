@@ -7,6 +7,174 @@
 	},
 	"item": [
 		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "create new profile",
+					"id": "32d43183-62d0-4ddd-991f-dd2aa5b8fe6f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 32,\n    \"email\": null,\n    \"gender\": \"male\"\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get profile",
+					"id": "a46f566c-533f-49fd-9459-9da23e1be945",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"price\": 10,\n    \"category\": \"book\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profile/64433add52dd1e634070fcd6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile",
+								"64433add52dd1e634070fcd6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all profiles",
+					"id": "e7dd968f-bfdc-456e-b29c-3edd4da64f03",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete profile",
+					"id": "a719095c-d3ab-476f-baed-39ace3e881f4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Monk Who Sold His Ferrari\",\n    \"price\": 10,\n    \"category\": \"book\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profile/64433add52dd1e634070fcd6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile",
+								"64433add52dd1e634070fcd6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update profile",
+					"id": "f593d5cf-6bc1-42c4-b1e8-05bcd6dca510",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 54,\n    \"gender\": \"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profile/64433b0b52dd1e634070fcd8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile",
+								"64433b0b52dd1e634070fcd8"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "d1d2638b-7c5e-4b3e-8373-37d1ba82e4ec"
+		},
+		{
 			"name": "POST Prompt",
 			"id": "89fca2af-363f-4905-a0db-69f2a2e4e546",
 			"protocolProfileBehavior": {
