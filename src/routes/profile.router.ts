@@ -3,7 +3,7 @@ import express, {Request, response, Response} from "express";
 import { ObjectId } from "mongodb";
 import { collections } from "../services/database.service";
 import Profile from "../models/profile";
-import {ChatGPTQuery} from "../ChatGPTQuery";
+import {OpenAiQueryController} from "../open-ai-query-controller";
 import {ChatGPTClient} from "../clients/open-ai-client";
 import OpenAiQuery from "../models/openai.query";
 
@@ -21,8 +21,8 @@ profileRouter.get("/:id", async (req: Request, res: Response) => {
         const query = { _id: new ObjectId(id) };
         // @ts-ignore
         const profile: Profile = (await collections.profile.findOne(query)) as Profile;
-        const openAiQuery = ChatGPTQuery.recommendTopBooks(profile)
-        var queryObject: OpenAiQuery
+        const openAiQuery = OpenAiQuery.recommendTopBooks(profile)
+        var queryObject: OpenAiQueryController
         const value = await ChatGPTClient.Instance.openAiResponse(openAiQuery)
         queryObject = new OpenAiQuery(profile.id!!, openAiQuery, value)
         console.log(`insert chatGPT response to DB with object ${queryObject.toString()}`)

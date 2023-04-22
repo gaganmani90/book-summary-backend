@@ -1,6 +1,6 @@
 import Profile from "./models/profile";
 
-export class ChatGPTQuery {
+export class OpenAiQueryController {
     public static recommendTopBooks(profile: Profile): string {
         var query = ""
         const prefix = `recommend top ${queryParams.bookCount} books for`
