@@ -10,7 +10,8 @@ export const DB_CONNECTION_STRING = process.env.DB_CONN_STRING!!
 export const collections: {
     games?: mongoDB.Collection,
     bookSummary?: mongoDB.Collection,
-    profile?: mongoDB.Collection
+    profile?: mongoDB.Collection,
+    openAiQuery?: mongoDB.Collection
 } = {}
 
 // Initialize Connection
@@ -19,6 +20,7 @@ export async function connectToDatabase() {
     const DB_CONNECTION_STRING = process.env.DB_CONN_STRING!!
     const BOOK_SUMMARY_COLLECTION = process.env.BOOK_SUMMARY_COLLECTION_NAME!!
     const PROFILE_COLLECTION_NAME = process.env.PROFILE_COLLECTION_NAME!!
+    const OPENAI_QUERY__COLLECTION_NAME = process.env.OPENAI_QUERY_COLLECTION_NAME!!
 
     console.log("connecting to db...")
     dotenv.config();
@@ -37,6 +39,7 @@ export async function connectToDatabase() {
     collections.games = db.collection(BOOK_SUMMARY_COLLECTION);
     collections.bookSummary = db.collection(BOOK_SUMMARY_COLLECTION);
     collections.profile = db.collection(PROFILE_COLLECTION_NAME);
+    collections.openAiQuery = db.collection(OPENAI_QUERY__COLLECTION_NAME)
 
     console.log(`Successfully connected to database: ${db.databaseName}; connection: ${DB_CONNECTION_STRING}`);
 }
