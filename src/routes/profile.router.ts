@@ -21,7 +21,7 @@ profileRouter.get("/:id", async (req: Request, res: Response) => {
         const query = { _id: new ObjectId(id) };
         // @ts-ignore
         const profile: Profile = (await collections.profile.findOne(query)) as Profile;
-        const openAiQuery = OpenAiQuery.recommendTopBooks(profile)
+        const openAiQuery = OpenAiQueryController.recommendTopBooks(profile)
         var queryObject: OpenAiQueryController
         const value = await ChatGPTClient.Instance.openAiResponse(openAiQuery)
         queryObject = new OpenAiQuery(profile.id!!, openAiQuery, value)
