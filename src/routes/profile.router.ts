@@ -5,8 +5,12 @@ import { collections } from "../services/database.service";
 import Profile from "../models/profile";
 import {OpenAiQueryController} from "../open-ai-query-controller";
 import {ChatGPTClient} from "../clients/open-ai-client";
-import OpenAiQuery, {fetchOpenAiQueryByProfileId} from "../models/openai.query";
+import OpenAiQuery from "../models/openai.query";
 import rateLimit from 'express-rate-limit';
+// @ts-ignore
+import morgan from 'morgan';
+
+export const logger = morgan('combined');
 
 export const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -19,6 +23,7 @@ export const profileRouter = express.Router();
 
 profileRouter.use(express.json());
 profileRouter.use(limiter)
+profileRouter.use(logger)
 
 
 // GET
