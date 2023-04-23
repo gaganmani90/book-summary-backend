@@ -3,6 +3,7 @@ import * as mongoDB from "mongodb";
 import {validateBookSchema} from "../models/book";
 import {createProfileUniqueIndex, validateProfileSchema} from "../models/profile";
 import {createUniqueIndex} from "../models/openai.query";
+import RedisClient from "../cache/redis-client";
 
 export const BOOK_DB_NAME = process.env.DB_NAME!!
 export const DB_CONNECTION_STRING = process.env.DB_CONN_STRING!!
@@ -13,8 +14,12 @@ export const collections: {
     openAiQuery?: mongoDB.Collection
 } = {}
 
+export async function bootstrap() {
+    await connectToDatabase()
+    await RedisClient.connect()
+}
 // Initialize Connection
-export async function connectToDatabase() {
+async function connectToDatabase() {
     const BOOK_DB_NAME = process.env.DB_NAME!!
     const DB_CONNECTION_STRING = process.env.DB_CONN_STRING!!
     const BOOK_SUMMARY_COLLECTION = process.env.BOOK_SUMMARY_COLLECTION_NAME!!
@@ -24,10 +29,8 @@ export async function connectToDatabase() {
     console.log("connecting to db...")
 
     const client: mongoDB.MongoClient = new mongoDB.MongoClient(DB_CONNECTION_STRING);
-    console.log(`successfully got the client ${client}`)
 
     await client.connect();
-    console.log(`db connected`)
 
     const db: mongoDB.Db = client.db(BOOK_DB_NAME);
 
@@ -42,5 +45,5 @@ export async function connectToDatabase() {
     await createUniqueIndex(collections.openAiQuery)
     await createProfileUniqueIndex(collections.profile)
 
-    console.log(`Successfully connected to database: ${db.databaseName}; connection: ${DB_CONNECTION_STRING}`);
+    console.log(`connected to database: ${db.databaseName}; connection: ${DB_CONNECTION_STRING}`);
 }

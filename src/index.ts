@@ -2,7 +2,7 @@ import express, {Express, Request, Response} from 'express';
 
 import dotenv from 'dotenv';
 import {ChatGPTClient} from "./clients/open-ai-client";
-import { connectToDatabase } from "./services/database.service"
+import {bootstrap} from "./services/database.service"
 import {bookRouter} from "./routes/book.router";
 import {profileRouter} from "./routes/profile.router";
 import {opanAiQueryRouter} from "./routes/openai.query.router";
@@ -36,7 +36,7 @@ app.post('/ask', async (req: Request, res: Response) => {
 
 });
 
-connectToDatabase()
+bootstrap()
     .then(() => {
         app.use(function (req, res, next) {
             // Website you wish to allow to connect

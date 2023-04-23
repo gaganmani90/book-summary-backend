@@ -12,18 +12,11 @@ class RedisClient {
         this.client = redis.createClient({
             url: redisUrl
         });
-        this.client.connect()
 
-        // Handle the 'ready' event to open the connection to the Redis server
-        this.client.on('ready', () => {
-            console.log('Redis connection is open');
-        });
-
-        // Handle the 'end' event to close the connection to the Redis server
-        this.client.on('end', () => {
-            console.log('Redis connection is closed');
-
-        });
+        this.client.on('error', err => console.error('redis client error', err));
+        this.client.on('connect', () => console.log('redis client is connect'));
+        this.client.on('reconnecting', () => console.log('redis client is reconnecting'));
+        this.client.on('ready', () => console.log('redis client is ready'));
 
         console.log(`successfully created redis instance`)
 
@@ -61,6 +54,10 @@ class RedisClient {
 
     public closeConnection(): void {
         this.client.quit();
+    }
+
+    public async connect() {
+        await this.client.connect()
     }
 }
 
