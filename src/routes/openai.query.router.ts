@@ -41,7 +41,7 @@ opanAiQueryRouter.get("/", async (req: Request, res: Response) => {
         if(id) {
             const query = { profileId: new ObjectId(id) };
             // @ts-ignore
-            openAiQueries = (await collections.openAiQuery.findOne(query)) as OpenAiQuery[];
+            openAiQueries = (await collections.openAiQuery?.find(query).toArray()) as OpenAiQuery[];
         } else {
             // @ts-ignore
             openAiQueries = (await collections.openAiQuery.find({}).toArray()) as OpenAiQuery[];
