@@ -28,12 +28,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/profile",
-							"protocol": "http",
+							"raw": "{{endpoint}}/profile",
 							"host": [
-								"localhost"
+								"{{endpoint}}"
 							],
-							"port": "8080",
 							"path": [
 								"profile"
 							]
@@ -60,15 +58,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/profile/6443ea02710f2f17b1f311d8",
-							"protocol": "http",
+							"raw": "{{endpoint}}/profile/64458c16353d28035380a40b",
 							"host": [
-								"localhost"
+								"{{endpoint}}"
 							],
-							"port": "8080",
 							"path": [
 								"profile",
-								"6443ea02710f2f17b1f311d8"
+								"64458c16353d28035380a40b"
 							]
 						}
 					},
@@ -84,10 +80,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{local-endpoint}}/profile",
-							"protocol": "http",
+							"raw": "{{endpoint}}/profile",
 							"host": [
-								"{{local-endpoint}}"
+								"{{endpoint}}"
 							],
 							"path": [
 								"profile"
@@ -115,12 +110,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/profile/64433add52dd1e634070fcd6",
-							"protocol": "http",
+							"raw": "{{endpoint}}/profile/64433add52dd1e634070fcd6",
 							"host": [
-								"localhost"
+								"{{endpoint}}"
 							],
-							"port": "8080",
 							"path": [
 								"profile",
 								"64433add52dd1e634070fcd6"
@@ -148,12 +141,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/profile/64433b0b52dd1e634070fcd8",
-							"protocol": "http",
+							"raw": "{{endpoint}}/profile/64433b0b52dd1e634070fcd8",
 							"host": [
-								"localhost"
+								"{{endpoint}}"
 							],
-							"port": "8080",
 							"path": [
 								"profile",
 								"64433b0b52dd1e634070fcd8"
@@ -186,10 +177,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{local-endpoint}}/queries",
-							"protocol": "http",
+							"raw": "{{endpoint}}/queries",
 							"host": [
-								"{{local-endpoint}}"
+								"{{endpoint}}"
 							],
 							"path": [
 								"queries"
@@ -208,10 +198,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{local-endpoint}}/queries?profileId=6443ea02710f2f17b1f311d8",
-							"protocol": "http",
+							"raw": "{{endpoint}}/queries?profileId=64458c16353d28035380a40b",
 							"host": [
-								"{{local-endpoint}}"
+								"{{endpoint}}"
 							],
 							"path": [
 								"queries"
@@ -219,7 +208,7 @@
 							"query": [
 								{
 									"key": "profileId",
-									"value": "6443ea02710f2f17b1f311d8"
+									"value": "64458c16353d28035380a40b"
 								}
 							]
 						}
@@ -245,12 +234,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/queries/6444124698eb4947455947c0",
-							"protocol": "http",
+							"raw": "{{endpoint}}/queries/6444124698eb4947455947c0",
 							"host": [
-								"localhost"
+								"{{endpoint}}"
 							],
-							"port": "8080",
 							"path": [
 								"queries",
 								"6444124698eb4947455947c0"
@@ -346,12 +333,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/books",
-					"protocol": "http",
+					"raw": "{{endpoint}}/books",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "8080",
 					"path": [
 						"books"
 					]
@@ -374,12 +359,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/books",
-							"protocol": "http",
+							"raw": "{{endpoint}}/books",
 							"host": [
-								"localhost"
+								"{{endpoint}}"
 							],
-							"port": "8080",
 							"path": [
 								"books"
 							]
@@ -411,12 +394,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/books/64408b8b44b8fba579f4b8ae",
-					"protocol": "http",
+					"raw": "{{endpoint}}/books/64408b8b44b8fba579f4b8ae",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "8080",
 					"path": [
 						"books",
 						"64408b8b44b8fba579f4b8ae"
@@ -452,12 +433,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/books/64408b8b44b8fba579f4b8ae",
-					"protocol": "http",
+					"raw": "{{endpoint}}/books/64408b8b44b8fba579f4b8ae",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "8080",
 					"path": [
 						"books",
 						"64408b8b44b8fba579f4b8ae"
@@ -485,12 +464,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/books/64408b3544b8fba579f4b8ad",
-					"protocol": "http",
+					"raw": "{{endpoint}}/books/64408b3544b8fba579f4b8ad",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "8080",
 					"path": [
 						"books",
 						"64408b3544b8fba579f4b8ad"
@@ -509,12 +486,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/books",
-					"protocol": "http",
+					"raw": "{{endpoint}}/books",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "8080",
 					"path": [
 						"books"
 					]
