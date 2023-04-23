@@ -1,6 +1,5 @@
 // External Dependencies
 import * as mongoDB from "mongodb";
-import * as dotenv from "dotenv";
 import {validateBookSchema} from "../models/book";
 import {createProfileUniqueIndex, validateProfileSchema} from "../models/profile";
 import {createUniqueIndex} from "../models/openai.query";
@@ -23,7 +22,6 @@ export async function connectToDatabase() {
     const OPENAI_QUERY__COLLECTION_NAME = process.env.OPENAI_QUERY_COLLECTION_NAME!!
 
     console.log("connecting to db...")
-    dotenv.config();
 
     const client: mongoDB.MongoClient = new mongoDB.MongoClient(DB_CONNECTION_STRING);
     console.log(`successfully got the client ${client}`)

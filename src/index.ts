@@ -7,7 +7,8 @@ import {bookRouter} from "./routes/book.router";
 import {profileRouter} from "./routes/profile.router";
 import {opanAiQueryRouter} from "./routes/openai.query.router";
 
-dotenv.config();
+
+if(process.env.NODE_ENV != 'prod') dotenv.config();
 
 export const app: Express = express();
 app.use(express.json());
