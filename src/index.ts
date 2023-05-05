@@ -6,13 +6,20 @@ import {bootstrap} from "./services/database.service"
 import {bookRouter} from "./routes/book.router";
 import {profileRouter} from "./routes/profile.router";
 import {opanAiQueryRouter} from "./routes/openai.query.router";
+import authRoutes from './routes/auth';
+import passport from './passport';
+import cors from 'cors';
+// @ts-ignore
+import session from 'express-session';
 
 
+console.log(process.env.NODE_ENV)
 if(process.env.NODE_ENV != 'prod') dotenv.config();
 
 export const app: Express = express();
 app.use(express.json());
 const port = process.env.PORT;
+
 
 app.post('/ask', async (req: Request, res: Response) => {
     const prompt = req.body.prompt;
@@ -39,20 +46,31 @@ app.post('/ask', async (req: Request, res: Response) => {
 bootstrap()
     .then(() => {
         app.use(function (req, res, next) {
-            // Website you wish to allow to connect
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-
-            // Request methods you wish to allow
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-            // Request headers you wish to allow
-            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+            cors({
+                origin: 'http://localhost:3000',
+                methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
+                allowedHeaders: ['X-Requested-With', 'content-type', 'Origin', 'Content-Type',
+                    'Accept', 'Authorization', 'Access-Control-Allow-Methods','Access-Control-Allow-Origin'],
+                credentials: true,
+            })
 
             next()
         });
+
         app.use("/books", bookRouter);
         app.use("/profile", profileRouter);
         app.use("/queries", opanAiQueryRouter);
+
+        // Login
+        app.use(session({
+            secret: 'your-session-secret-goes-here', // replace with your actual session secret value
+            resave: false,
+            saveUninitialized: false
+        }));
+        app.use(passport.initialize());
+        app.use(passport.session());
+
+        app.use('/auth', authRoutes);
 
         app.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);

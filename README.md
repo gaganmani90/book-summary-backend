@@ -1,8 +1,6 @@
 # book-summary-backend
 Book summary of top goodreads books
 
-
-
 # Local Testing
 
 ## APIs
