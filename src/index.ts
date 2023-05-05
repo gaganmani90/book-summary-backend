@@ -1,4 +1,4 @@
-import express, {Express, Request, Response} from 'express';
+import express, {Express, Request, Response, NextFunction} from 'express';
 
 import dotenv from 'dotenv';
 import {ChatGPTClient} from "./clients/open-ai-client";
@@ -6,7 +6,7 @@ import {bootstrap} from "./services/database.service"
 import {bookRouter} from "./routes/book.router";
 import {profileRouter} from "./routes/profile.router";
 import {opanAiQueryRouter} from "./routes/openai.query.router";
-import authRoutes from './routes/auth';
+import authRoutes from './routes/auth.router';
 import passport from './passport';
 import cors from 'cors';
 // @ts-ignore
@@ -50,17 +50,13 @@ bootstrap()
                 origin: 'http://localhost:3000',
                 methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
                 allowedHeaders: ['X-Requested-With', 'content-type', 'Origin', 'Content-Type',
-                    'Accept', 'Authorization', 'Access-Control-Allow-Methods','Access-Control-Allow-Origin'],
+                    'Accept', 'Authorization', 'Access-Control-Allow-Methods','Access-Control-Allow-Origin',
+                    'Access-Control-Allow-Headers'],
                 credentials: true,
             })
 
             next()
         });
-
-        app.use("/books", bookRouter);
-        app.use("/profile", profileRouter);
-        app.use("/queries", opanAiQueryRouter);
-
         // Login
         app.use(session({
             secret: 'your-session-secret-goes-here', // replace with your actual session secret value
@@ -70,7 +66,10 @@ bootstrap()
         app.use(passport.initialize());
         app.use(passport.session());
 
-        app.use('/auth', authRoutes);
+        app.use("/books", cors(), bookRouter);
+        app.use("/profile", cors(), profileRouter);
+        app.use("/queries", cors(), opanAiQueryRouter);
+        app.use('/auth', cors(), authRoutes);
 
         app.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);
