@@ -11,6 +11,7 @@ import passport from './passport';
 import cors from 'cors';
 // @ts-ignore
 import session from 'express-session';
+import {askRouter} from "./routes/ask.router";
 
 
 console.log(process.env.NODE_ENV)
@@ -19,29 +20,6 @@ if(process.env.NODE_ENV != 'prod') dotenv.config();
 export const app: Express = express();
 app.use(express.json());
 const port = process.env.PORT;
-
-
-app.post('/ask', async (req: Request, res: Response) => {
-    const prompt = req.body.prompt;
-
-    try {
-        if(prompt == null) {
-            res.status(400).json({
-                success: false,
-                message: "Uh oh, no prompt was provided",
-            })
-            throw new Error("prompt is empty")
-        }
-        const response = await ChatGPTClient.Instance.openAiResponse(prompt)
-        return res.status(200).json({
-            success: true,
-            message: response,
-        });
-    } catch (err) {
-        console.log(err)
-    }
-
-});
 
 bootstrap()
     .then(() => {
@@ -70,6 +48,7 @@ bootstrap()
         app.use("/profile", cors(), profileRouter);
         app.use("/queries", cors(), opanAiQueryRouter);
         app.use('/auth', cors(), authRoutes);
+        app.use('/ask', cors, askRouter)
 
         app.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);
