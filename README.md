@@ -10,7 +10,11 @@ Import Postman API collection from `postman/collections/OpenAPI.json` to your Po
 * Setup MongoDB locally. I suggest to setup MongoDB Compass client and `mongod` CLI.
 * Start the server before running the application, else it will fail.
 
-`npm run start`
+```shell
+npx eslint --ext .ts src/ # ES Lint
+npm run start
+```
+
 
 # Deployment
 

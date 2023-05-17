@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-ignore
 const supertest_1 = require("supertest");
-const src_1 = require("../index");
+const src_1 = require("../src");
 describe.skip('Profile CRUD API', () => {
     it('should retrieve the created profile', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield (0, supertest_1.request)(src_1.app).get(`/profile`);
