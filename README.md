@@ -18,6 +18,8 @@ npm run start
 
 # Deployment
 
+Endpoint: https://book-summary-backend.herokuapp.com/
+
 ## Heroku
 
 ### CLI
