@@ -4,6 +4,7 @@ import {validateBookSchema} from "../models/book";
 import {createProfileUniqueIndex, validateProfileSchema} from "../models/profile";
 import {createUniqueIndex} from "../models/openai.query";
 import RedisClient from "../cache/redis-client";
+import {MongoClient} from "mongodb";
 
 export const BOOK_DB_NAME = process.env.DB_NAME!!
 export const DB_CONNECTION_STRING = process.env.DB_CONN_STRING!!
@@ -31,6 +32,8 @@ async function connectToDatabase() {
     const client: mongoDB.MongoClient = new mongoDB.MongoClient(DB_CONNECTION_STRING);
 
     await client.connect();
+
+    console.log(`${DB_CONNECTION_STRING}: successfully connected`)
 
     const db: mongoDB.Db = client.db(BOOK_DB_NAME);
 
