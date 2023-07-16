@@ -7,6 +7,8 @@ Book summary of top goodreads books
 Import Postman API collection from `postman/collections/OpenAPI.json` to your Postman client.
 
 ## Database
+* `sudo brew services start mongodb-community@6.0`
+* `sudo brew services stop mongodb-community@6.0`
 * Setup MongoDB locally. I suggest to setup MongoDB Compass client and `mongod` CLI.
 * Start the server before running the application, else it will fail.
 
