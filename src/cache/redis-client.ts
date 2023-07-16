@@ -18,7 +18,7 @@ class RedisClient {
         this.client.on('reconnecting', () => console.log('redis client is reconnecting'));
         this.client.on('ready', () => console.log('redis client is ready'));
 
-        console.log(`successfully created redis instance`)
+        console.log(`${redisUrl}: successfully created redis instance`)
 
     }
 
