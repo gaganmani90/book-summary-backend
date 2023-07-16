@@ -26,7 +26,7 @@ async function connectToDatabase() {
     const PROFILE_COLLECTION_NAME = process.env.PROFILE_COLLECTION_NAME!!
     const OPENAI_QUERY__COLLECTION_NAME = process.env.OPENAI_QUERY_COLLECTION_NAME!!
 
-    console.log("connecting to db...")
+    console.log(`${DB_CONNECTION_STRING}: connecting to db...`)
 
     const client: mongoDB.MongoClient = new mongoDB.MongoClient(DB_CONNECTION_STRING);
 

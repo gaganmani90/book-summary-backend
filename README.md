@@ -11,6 +11,10 @@ Import Postman API collection from `postman/collections/OpenAPI.json` to your Po
 * `sudo brew services stop mongodb-community@6.0`
 * Setup MongoDB locally. I suggest to setup MongoDB Compass client and `mongod` CLI.
 * Start the server before running the application, else it will fail.
+### Troubleshoot
+* `ps aux | grep -v grep | grep mongod`: Check mongo running port
+* `pgrep mongod`
+* Login to terminal: `mongosh`, `show databases`
 
 ```shell
 npx eslint --ext .ts src/ # ES Lint
