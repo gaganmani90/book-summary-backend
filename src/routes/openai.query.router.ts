@@ -2,12 +2,8 @@
 import express, {Request, response, Response} from "express";
 import { ObjectId } from "mongodb";
 import { collections } from "../services/database.service";
-import Profile from "../models/profile";
-import {OpenAiQueryController} from "../open-ai-query-controller";
-import {ChatGPTClient} from "../clients/open-ai-client";
 import OpenAiQuery from "../models/openai.query";
 import {limiter, logger} from "./profile.router";
-import {bookRouter} from "./book.router";
 
 // Global Config
 export const opanAiQueryRouter = express.Router();
