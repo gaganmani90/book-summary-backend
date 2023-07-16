@@ -1,7 +1,6 @@
-import express, {Express, Request, Response, NextFunction} from 'express';
+import express, {Express} from 'express';
 
 import dotenv from 'dotenv';
-import {ChatGPTClient} from "./clients/open-ai-client";
 import {bootstrap} from "./services/database.service"
 import {bookRouter} from "./routes/book.router";
 import {profileRouter} from "./routes/profile.router";
