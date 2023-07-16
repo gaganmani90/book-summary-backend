@@ -15,6 +15,12 @@ Import Postman API collection from `postman/collections/OpenAPI.json` to your Po
 * `ps aux | grep -v grep | grep mongod`: Check mongo running port
 * `pgrep mongod`
 * Login to terminal: `mongosh`, `show databases`
+* If not starting: 
+```shell
+rm -f /tmp/mongodb-27017.sock
+mkdir -p /Users/gaganmani/data/db
+sudo mongod --dbpath ~/data/db # start 
+```
 
 ```shell
 npx eslint --ext .ts src/ # ES Lint
