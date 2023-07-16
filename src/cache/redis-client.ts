@@ -1,5 +1,6 @@
 import * as redis from 'redis';
 import { promisify } from 'util';
+import {logger} from "../clients/book-summary-logger";
 
 class RedisClient {
     private static instance: RedisClient;
@@ -7,18 +8,18 @@ class RedisClient {
 
     private constructor() {
         const redisUrl = process.env.REDIS_URL || "redis://localhost:6379"
-        console.log(`creating instance ${redisUrl}`)
+        logger.info(`creating instance ${redisUrl}`)
         // Create a new Redis client
         this.client = redis.createClient({
             url: redisUrl
         });
 
-        this.client.on('error', err => console.error('redis client error', err));
-        this.client.on('connect', () => console.log('redis client is connect'));
-        this.client.on('reconnecting', () => console.log('redis client is reconnecting'));
-        this.client.on('ready', () => console.log('redis client is ready'));
+        this.client.on('error', err => logger.error('redis client error', err));
+        this.client.on('connect', () => logger.info('redis client is connect'));
+        this.client.on('reconnecting', () => logger.info('redis client is reconnecting'));
+        this.client.on('ready', () => logger.info('redis client is ready'));
 
-        console.log(`${redisUrl}: successfully created redis instance`)
+        logger.info(`${redisUrl}: successfully created redis instance`)
 
     }
 
@@ -26,9 +27,9 @@ class RedisClient {
     verifyRedisConnection() {
             //const result = await this.pingAsync()
             this.client.ping().then(
-                res => console.log('Redis connection is working:', res)
+                res => logger.info('Redis connection is working:', res)
             ).catch(err => {
-                console.error('Redis connection error:', err);
+                logger.error('Redis connection error:', err);
             })
     }
 
@@ -41,13 +42,13 @@ class RedisClient {
     }
 
     public async get(key: string): Promise<string | null> {
-        console.log(`getting from redis ${key}`)
+        logger.info(`getting from redis ${key}`)
         this.verifyRedisConnection()
         return this.client.get(key)
     }
 
     public async set(key: string, value: string) {
-        console.log(`writing to redis ${{key}}`)
+        logger.info(`writing to redis ${{key}}`)
         this.verifyRedisConnection()
         await this.client.set(key, JSON.stringify(value))
     }
