@@ -1,7 +1,10 @@
 import { Request, Response, Router } from 'express';
 import passport, {GOOGLE_CLIENT_ID} from '../passport';
+import {httpLogger} from "./profile.router";
 
 const router: Router = Router();
+
+router.use(httpLogger)
 
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),

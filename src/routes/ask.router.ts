@@ -5,11 +5,13 @@ import { collections } from "../services/database.service";
 import Book from "../models/book";
 import {ChatGPTClient} from "../clients/open-ai-client";
 import {app} from "../index";
+import {httpLogger} from "./profile.router";
 
 // Global Config
 export const askRouter = express.Router();
 
 askRouter.use(express.json());
+askRouter.use(httpLogger)
 
 // GET
 askRouter.post('/', async (req: Request, res: Response) => {

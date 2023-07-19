@@ -3,11 +3,13 @@ import express, { Request, Response } from "express";
 import { ObjectId } from "mongodb";
 import { collections } from "../services/database.service";
 import Book from "../models/book";
+import {httpLogger} from "./profile.router";
 
 // Global Config
 export const bookRouter = express.Router();
 
 bookRouter.use(express.json());
+bookRouter.use(httpLogger)
 
 // GET
 bookRouter.get("/:id", async (req: Request, res: Response) => {

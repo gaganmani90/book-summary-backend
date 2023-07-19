@@ -3,14 +3,14 @@ import express, {Request, response, Response} from "express";
 import { ObjectId } from "mongodb";
 import { collections } from "../services/database.service";
 import OpenAiQuery from "../models/openai.query";
-import {limiter, logger} from "./profile.router";
+import {limiter, httpLogger} from "./profile.router";
 
 // Global Config
 export const opanAiQueryRouter = express.Router();
 
 opanAiQueryRouter.use(express.json());
 opanAiQueryRouter.use(limiter)
-opanAiQueryRouter.use(logger)
+opanAiQueryRouter.use(httpLogger)
 
 opanAiQueryRouter.get("/:id", async (req: Request, res: Response) => {
     const id = req?.params?.id;

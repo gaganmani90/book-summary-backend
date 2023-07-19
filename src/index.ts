@@ -3,7 +3,7 @@ import express, {Express} from 'express';
 import dotenv from 'dotenv';
 import {bootstrap} from "./services/database.service"
 import {bookRouter} from "./routes/book.router";
-import {profileRouter} from "./routes/profile.router";
+import {httpLogger, profileRouter} from "./routes/profile.router";
 import {opanAiQueryRouter} from "./routes/openai.query.router";
 import authRoutes from './routes/auth.router';
 import passport from './passport';

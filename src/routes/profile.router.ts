@@ -10,7 +10,7 @@ import rateLimit from 'express-rate-limit';
 // @ts-ignore
 import morgan from 'morgan';
 
-export const logger = morgan('combined');
+export const httpLogger = morgan('combined');
 
 export const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -23,7 +23,7 @@ export const profileRouter = express.Router();
 
 profileRouter.use(express.json());
 profileRouter.use(limiter)
-profileRouter.use(logger)
+profileRouter.use(httpLogger)
 
 
 // GET
