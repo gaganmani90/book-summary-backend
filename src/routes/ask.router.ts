@@ -27,7 +27,7 @@ askRouter.post('/', async (req: Request, res: Response) => {
             })
             throw new Error("prompt is empty")
         }
-        const response = await ChatGPTClient.Instance.openAiResponse(prompt)
+        const response = await ChatGPTClient.Instance.openAiResponseWithTurbo(prompt)
         return res.status(200).json({
             success: true,
             message: response,

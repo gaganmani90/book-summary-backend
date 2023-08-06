@@ -19,7 +19,7 @@ export const ProfileController = {
 
             const openAiQuery = OpenAiQueryController.recommendTopBooksQuery(profile)
             var queryObject: OpenAiQuery
-            const queryResponse = await ChatGPTClient.Instance.openAiResponse(openAiQuery)
+            const queryResponse = await ChatGPTClient.Instance.openAiResponseLegacy(openAiQuery)
             queryObject = new OpenAiQuery(profile._id!!, openAiQuery, queryResponse)
             console.log(`insert chatGPT response to DB with object ${queryObject.toString()}`)
 

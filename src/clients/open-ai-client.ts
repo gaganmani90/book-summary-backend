@@ -18,8 +18,8 @@ export class ChatGPTClient {
         this.openAi = new OpenAIApi(configuration);
     }
 
-    public async openAiResponse(prompt: string,
-                                model = "text-davinci-003",
+    public async openAiResponseWithTurbo(prompt: string,
+                                model = "gpt-3.5-turbo",
                                 maxToken = 1024): Promise<string> {
         var value: string = ""
         try {
@@ -28,7 +28,50 @@ export class ChatGPTClient {
                 console.log("cache hit...")
                 return cacheResponse
             }
-            console.log("chatGPT service call...")
+            console.log(`chatGPT service call to mode: ${model}`)
+            const response = await this.openAi.createChatCompletion({
+                model: model,
+                messages: [
+                    {
+                        "role": "system",
+                        "content": "You will be provided with statements, and your task is to provide book recommendations. " +
+                            "Limit your responses within 20 words. Format answers in markdown."
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                max_tokens: maxToken,
+                temperature: 0,
+            })
+            // @ts-ignore
+            value = JSON.stringify(response.data.choices[0].message.content)
+            RedisClient.set(prompt, JSON.stringify(response.data))
+        } catch(err) {
+            console.error("error during chat GPT api call")
+            console.error(err)
+        }
+        return value;
+    }
+
+    /**
+     * @deprecated since a turbo version is released, this is deprecated
+     * @param prompt
+     * @param model
+     * @param maxToken
+     */
+    public async openAiResponseLegacy(prompt: string,
+                                      model = "text-davinci-003",
+                                      maxToken = 1024): Promise<string> {
+        var value: string = ""
+        try {
+            const cacheResponse = await RedisClient.get(prompt)
+            if (cacheResponse) {
+                console.log("cache hit...")
+                return cacheResponse
+            }
+            console.log(`chatGPT service call to mode: ${model}`)
             const response = await this.openAi.createCompletion({
                 model: model,
                 prompt: prompt,
