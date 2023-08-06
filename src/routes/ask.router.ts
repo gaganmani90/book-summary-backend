@@ -18,7 +18,7 @@ askRouter.use(httpLogger)
 askRouter.post('/', async (req: Request, res: Response) => {
     const prompt = req.body.prompt;
     logger.info(`/ask API call with ${prompt}`)
-
+    // #swagger.summary = 'ChatGPT API Ask'
     try {
         if(prompt == null) {
             res.status(400).json({

@@ -9,6 +9,8 @@ router.use(httpLogger)
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req: Request, res: Response) => {
+        // #swagger.description = 'google call back'
+        // #swagger.summary = 'google call back'
         try {
             console.log(req.user);
             res.redirect('http://localhost:3000/login');
