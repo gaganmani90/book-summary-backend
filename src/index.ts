@@ -47,7 +47,7 @@ bootstrap()
         app.use("/profile", cors(), profileRouter);
         app.use("/queries", cors(), opanAiQueryRouter);
         app.use('/auth', cors(), authRoutes);
-        app.use('/ask', cors, askRouter)
+        app.use('/ask', cors(), askRouter)
 
         app.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);
