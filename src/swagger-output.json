@@ -7,7 +7,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8080/"
+      "url": "http://localhost:8080/",
+      "description": "local server"
+    },
+    {
+      "url": "https://book-summary-backend.herokuapp.com/",
+      "description": "production server"
     }
   ],
   "paths": {

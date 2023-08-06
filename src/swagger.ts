@@ -6,6 +6,16 @@ const doc = {
     },
     host: 'localhost:8080',
     schemes: ['http'],
+    servers: [
+        {
+            url: "http://localhost:8080/",
+            description: "local server"
+        },
+        {
+            url: "https://book-summary-backend.herokuapp.com/",
+            description: "production server"
+        }
+    ],
 };
 const endpoints = [
     './src/routes/profile.router.ts',
